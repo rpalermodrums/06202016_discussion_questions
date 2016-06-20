@@ -14,9 +14,9 @@
 	    - used for side effects
 	- map/collect
 	    - manipulate each object in an array with a block
-	- find
+	- find/detect
 	    - finds the first element in an array for which the block returns true
-	- select/detect
+	- select
 	    - selects all the elements for which the block returns true
 - Objects
     - why have objects instead of hashes?
@@ -59,6 +59,3 @@
 	    author_books  = @@all.select { |book| book.author == author }
 	    author_books.map { |book| book.genre } .uniq
 	  end
-
-
-		
