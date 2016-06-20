@@ -1,23 +1,64 @@
-1. Think about arrays
-- What are some of the methods (non-iterator methods) that you know?
-- When are they used?
+- What are some non-iterator methods for arrays and when are they used?
+	- compact
+	    - takes away the nil values from an array
+	- count
+	    - count number of elements in an array
+	- include?
+	    - checks if an element is in an array
+	- flatten
+	    - collapses sub-arrays into a normal one
+	- a lot more….
+	    - a lot more things…..
+- List the main iterator methods for arrays and tell when you use each one.
+	- each
+	    - used for side effects
+	- map/collect
+	    - manipulate each object in an array with a block
+	- find
+	    - finds the first element in an array for which the block returns true
+	- select/detect
+	    - selects all the elements for which the block returns true
+- Objects
+    - why have objects instead of hashes?
+	- They can have much more descriptive and can more easily structure representations of real-life objects
+    - what is the difference between using a getter method and just referencing the instance variable?
+	- A getter method can be used to retrieve information about an attribute outside of the class when a new instance is created.
+    - Should a method that finds the correct user by name (find_by_name?) be a class method or an instance method? Why?
+	- Instance level. because we will be looking for self inside of an @@all array(assuming this is a User class).
+    - how does initialize work in an object?
+	- it sets instance attributes to certain values that are either given as a default or input each time for a new instance
+    - what two methods will attr_accessor :name write?
+	- def name
+	    @name
+	  end
+	- def name=(name)
+	    @name = name
+	  end
+-Object relations
+      Books, Authors, and Genres
+    - Draw out the relations between the objects
+	-  books belong to an author and a genre. authors have many books and have many genres through books. genres will have many books and many authors through books.
+    - Which object is going to act as my join - and thus store the data?
+	- books
+    - Write out the three classes with the belongs to relations
+	- class Author
+	    attr_accessor :books
+	  end
+	- class Book
+	    attr_accessor :author, :genre
+	  end
+	- class Genre
+	    attr_accessor :books
+	  end
+    - write a method that will give me a list of books written by an author(inside books)
+	- def books_by_author(author)
+	    @@all.select { |book| book.author == author }
+	  end
+    - write a method that will give me a list of all genre’s of an author(inside books)
+	- def genres_by_author(author)
+	    author_books  = @@all.select { |book| book.author == author }
+	    author_books.map { |book| book.genre } .uniq
+	  end
 
-2. Now list iterator methods for arrays
-- There are four main ones that we have discussed
-- When do you use each one
 
-3. Now onto objects
-  1. Why do we even have objects?  Why not just use hashes?
-  2. What is the difference between using a getter method, and just referencing the instance variable?
-  3. Should a method that finds the correct user by name (eg. find_by_name?) be a class method or instance method?  Why?
-  4. How does initialize work in an object?
-  5. What two methods will attr_accessor :name write?
-  Write them out please...
-
-4. Object Relations
-  Consider books, authors and genres.
-  1. Draw out the relations between the objects.  Assume a book can only have one genre.
-  2. Which object is going act as my join - and thus store the data?
-  3. Ok, now write out the three classes and fill in the belongs to relations.
-  4. Now write the method that will give me a list of books written by an author.
-  5. Now write a method that will give a list of all of the genre's of an author.
+		
